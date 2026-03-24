@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import solsolsol.mukpick.domain.mapping.FoodIngredient;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -25,7 +26,7 @@ public class Food {
     private String imageUrl;
 
     @OneToMany(mappedBy = "food", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<FoodIngredient> foodIngredients;
+    private List<FoodIngredient> foodIngredients = new ArrayList<>();
 
     @OneToOne(mappedBy = "food")
     private Recipe recipe;
@@ -42,5 +43,9 @@ public class Food {
         this.name = name;
         this.description = description;
         this.imageUrl = imageUrl;
+    }
+
+    public void setRecipe(Recipe recipe) {
+        this.recipe = recipe;
     }
 }

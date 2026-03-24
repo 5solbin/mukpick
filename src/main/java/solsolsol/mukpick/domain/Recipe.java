@@ -25,4 +25,8 @@ public class Recipe {
     public Recipe(String content) {
         this.content = content;
     }
+
+    public void setFood(Food food) {
+        this.food = food;
+    }
 }
