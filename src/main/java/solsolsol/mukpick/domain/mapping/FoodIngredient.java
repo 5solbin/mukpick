@@ -22,4 +22,12 @@ public class FoodIngredient {
     @ManyToOne
     @JoinColumn(name = "ingredient_id")
     private Ingredient ingredient;
+
+    public void setFood(Food food) {
+        this.food = food;
+    }
+
+    public void setIngredient(Ingredient ingredient) {
+        this.ingredient = ingredient;
+    }
 }

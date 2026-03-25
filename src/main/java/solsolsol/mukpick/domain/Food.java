@@ -51,5 +51,6 @@ public class Food {
 
     public void addFoodIngredient(FoodIngredient foodIngredient) {
         this.foodIngredients.add(foodIngredient);
+        foodIngredient.setFood(this);
     }
 }

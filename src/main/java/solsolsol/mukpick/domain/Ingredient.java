@@ -32,5 +32,6 @@ public class Ingredient {
 
     public void addFoodIngredient(FoodIngredient foodIngredient) {
         this.foodIngredients.add(foodIngredient);
+        foodIngredient.setIngredient(this);
     }
 }
