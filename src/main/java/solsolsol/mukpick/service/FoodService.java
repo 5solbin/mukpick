@@ -94,8 +94,9 @@ public class FoodService {
                 () -> new IllegalArgumentException("음식 정보가 존재하지 않습니다.")
         );
         Recipe foundRecipe = recipeRepository.findByFoodId(foodId);
+        List<FoodIngredient> foodIngredients = food.getFoodIngredients();
 
-        return new GetFoodResDto(food, foundRecipe);
+        return new GetFoodResDto(food, foundRecipe, foodIngredients);
     }
 
     public GetRandomFoodResDto getRandomFood() {

@@ -3,9 +3,9 @@ package solsolsol.mukpick.dto.Food.saveFood;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter @Setter
+@Getter
 public class SaveFoodResDto {
-    private Long foodId;
+    private final Long foodId;
 
     public SaveFoodResDto(Long foodId) {
         this.foodId = foodId;
