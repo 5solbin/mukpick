@@ -7,15 +7,12 @@ import solsolsol.mukpick.domain.Food;
 import solsolsol.mukpick.domain.Recipe;
 import solsolsol.mukpick.dto.Food.createFood.CreateFoodReqDto;
 import solsolsol.mukpick.dto.Food.createFood.CreateFoodResDto;
-import solsolsol.mukpick.dto.Food.getFood.GetFoodReqDto;
 import solsolsol.mukpick.dto.Food.getFood.GetFoodResDto;
 import solsolsol.mukpick.dto.Food.getRandomFood.GetRandomFoodResDto;
 import solsolsol.mukpick.repository.FoodRepository;
 import solsolsol.mukpick.repository.RecipeRepository;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 @Service
@@ -53,9 +50,8 @@ public class FoodService {
         return new CreateFoodResDto(savedFood.getId());
     }
 
-    public GetFoodResDto getFood(GetFoodReqDto getFoodRequestDto) {
+    public GetFoodResDto getFood(Long foodId) {
 
-        Long foodId = getFoodRequestDto.getFoodId();
         Food food = foodRepository.findById(foodId).orElseThrow(
                 () -> new IllegalArgumentException("음식 정보가 존재하지 않습니다.")
         );
