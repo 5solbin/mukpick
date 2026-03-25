@@ -9,10 +9,14 @@ import solsolsol.mukpick.dto.Food.createFood.CreateFoodReqDto;
 import solsolsol.mukpick.dto.Food.createFood.CreateFoodResDto;
 import solsolsol.mukpick.dto.Food.getFood.GetFoodReqDto;
 import solsolsol.mukpick.dto.Food.getFood.GetFoodResDto;
+import solsolsol.mukpick.dto.Food.getRandomFood.GetRandomFoodResDto;
 import solsolsol.mukpick.repository.FoodRepository;
 import solsolsol.mukpick.repository.RecipeRepository;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Service
 @RequiredArgsConstructor
@@ -58,5 +62,15 @@ public class FoodService {
         Recipe foundRecipe = recipeRepository.findByFoodId(foodId);
 
         return new GetFoodResDto(food, foundRecipe);
+    }
+
+    public GetRandomFoodResDto getRandomFood() {
+        List<Food> foods = foodRepository.findAll();
+        if (foods.isEmpty()) {
+            throw new IllegalArgumentException("랜덤으로 뽑을 음식이 없습니다.");
+        }
+
+        Food food = foods.get(ThreadLocalRandom.current().nextInt(foods.size()));
+        return new GetRandomFoodResDto(food);
     }
 }
