@@ -1,13 +1,13 @@
-package solsolsol.mukpick.dto.Food.createFood;
+package solsolsol.mukpick.dto.Food.saveFood;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter @Setter
-public class CreateFoodResDto {
+public class SaveFoodResDto {
     private Long foodId;
 
-    public CreateFoodResDto(Long foodId) {
+    public SaveFoodResDto(Long foodId) {
         this.foodId = foodId;
     }
 }

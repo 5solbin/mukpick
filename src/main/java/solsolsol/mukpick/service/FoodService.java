@@ -5,8 +5,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import solsolsol.mukpick.domain.Food;
 import solsolsol.mukpick.domain.Recipe;
-import solsolsol.mukpick.dto.Food.createFood.CreateFoodReqDto;
-import solsolsol.mukpick.dto.Food.createFood.CreateFoodResDto;
+import solsolsol.mukpick.dto.Food.saveFood.SaveFoodResDto;
+import solsolsol.mukpick.dto.Food.saveFood.SaveFoodReqDto;
 import solsolsol.mukpick.dto.Food.getFood.GetFoodResDto;
 import solsolsol.mukpick.dto.Food.getRandomFood.GetRandomFoodResDto;
 import solsolsol.mukpick.repository.FoodRepository;
@@ -24,30 +24,31 @@ public class FoodService {
     private final RecipeRepository recipeRepository;
 
     @Transactional
-    public CreateFoodResDto createFood(CreateFoodReqDto createFoodRequestDto) {
+    public SaveFoodResDto saveFood(SaveFoodReqDto saveFoodReqDto) {
 
         // check : 예외 좀 더 구체적으로 해야 될듯
-        if (createFoodRequestDto.getRecipeContent() == null) {
+        if (saveFoodReqDto.getRecipeContent() == null) {
             throw new IllegalArgumentException("레시피 정보가 필요합니다.");
         }
 
+        // check : 중복이 있으면?
         Food food = Food.builder()
-                .name(createFoodRequestDto.getName())
-                .description(createFoodRequestDto.getDescription())
-                .imageUrl(createFoodRequestDto.getImageUrl())
+                .name(saveFoodReqDto.getName())
+                .description(saveFoodReqDto.getDescription())
+                .imageUrl(saveFoodReqDto.getImageUrl())
                 .build();
 
         Food savedFood = foodRepository.save(food);
 
         Recipe recipe = Recipe.builder()
-                .content(createFoodRequestDto.getRecipeContent())
+                .content(saveFoodReqDto.getRecipeContent())
                 .build();
 
         savedFood.setRecipe(recipe);
         recipe.setFood(savedFood);
         recipeRepository.save(recipe);
 
-        return new CreateFoodResDto(savedFood.getId());
+        return new SaveFoodResDto(savedFood.getId());
     }
 
     public GetFoodResDto getFood(Long foodId) {

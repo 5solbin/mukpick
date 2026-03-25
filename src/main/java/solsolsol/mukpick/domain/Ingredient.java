@@ -19,11 +19,18 @@ public class Ingredient {
     @Column(nullable = false)
     private String name;
 
+    private String imageUrl;
+
     @OneToMany(mappedBy = "ingredient", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<FoodIngredient> foodIngredients;
 
     @Builder
-    public Ingredient(String name) {
+    public Ingredient(String name, String imageUrl) {
         this.name = name;
+        this.imageUrl = imageUrl;
+    }
+
+    public void addFoodIngredient(FoodIngredient foodIngredient) {
+        this.foodIngredients.add(foodIngredient);
     }
 }

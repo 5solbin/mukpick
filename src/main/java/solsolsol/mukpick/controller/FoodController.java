@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import solsolsol.mukpick.dto.Food.createFood.CreateFoodReqDto;
-import solsolsol.mukpick.dto.Food.createFood.CreateFoodResDto;
+import solsolsol.mukpick.dto.Food.saveFood.SaveFoodReqDto;
+import solsolsol.mukpick.dto.Food.saveFood.SaveFoodResDto;
 import solsolsol.mukpick.dto.Food.getFood.GetFoodResDto;
 import solsolsol.mukpick.dto.Food.getRandomFood.GetRandomFoodResDto;
 import solsolsol.mukpick.service.FoodService;
@@ -18,10 +18,10 @@ public class FoodController {
     private final FoodService foodService;
 
     @PostMapping
-    public ResponseEntity<CreateFoodResDto> createFood(
-            @RequestBody CreateFoodReqDto createFoodRequestDto
+    public ResponseEntity<SaveFoodResDto> saveFood(
+            @RequestBody SaveFoodReqDto saveFoodReqDto
     ) {
-        CreateFoodResDto response = foodService.createFood(createFoodRequestDto);
+        SaveFoodResDto response = foodService.saveFood(saveFoodReqDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 

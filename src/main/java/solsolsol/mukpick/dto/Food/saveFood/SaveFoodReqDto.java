@@ -1,11 +1,11 @@
-package solsolsol.mukpick.dto.Food.createFood;
+package solsolsol.mukpick.dto.Food.saveFood;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class CreateFoodReqDto {
+public class SaveFoodReqDto {
     private String name;
     private String description;
     private String imageUrl;

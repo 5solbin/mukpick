@@ -48,4 +48,8 @@ public class Food {
     public void setRecipe(Recipe recipe) {
         this.recipe = recipe;
     }
+
+    public void addFoodIngredient(FoodIngredient foodIngredient) {
+        this.foodIngredients.add(foodIngredient);
+    }
 }
