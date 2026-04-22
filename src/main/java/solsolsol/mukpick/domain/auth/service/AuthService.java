@@ -40,6 +40,26 @@ public class AuthService {
                 ));
 
         // 4. JWT 발급
+        return issueTokens(user);
+    }
+
+    @Transactional(readOnly = true)
+    public AuthResponse reissueToken(String refreshToken) {
+        // 1. refresh token 유효성 검증
+        if (!jwtProvider.validate(refreshToken)) {
+            throw new IllegalArgumentException("유효하지 않은 refresh token입니다.");
+        }
+
+        // 2. refresh token에서 userId 추출 후 유저 조회
+        Long userId = jwtProvider.getUserId(refreshToken);
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 유저입니다."));
+
+        // 3. 새 토큰 발급
+        return issueTokens(user);
+    }
+
+    private AuthResponse issueTokens(User user) {
         String accessToken = jwtProvider.generateAccessToken(user.getId());
         String refreshToken = jwtProvider.generateRefreshToken(user.getId());
 
