@@ -14,7 +14,10 @@ public class FoodResponse {
     private String name;
     private String description;
     private String imageUrl;
-    private String category;
+    private String cuisineType;  // 한식/양식/중식/일식
+    private String spicyLevel;   // 매운/안매운
+    private String foodType;     // 밥/면/빵/떡
+    private String tempType;     // 뜨거운/차가운
     private List<IngredientResponse> ingredients;
     private List<RecipeStepResponse> recipeSteps;
 
@@ -24,7 +27,10 @@ public class FoodResponse {
                 .name(food.getName())
                 .description(food.getDescription())
                 .imageUrl(food.getImageUrl())
-                .category(food.getCategory().name())
+                .cuisineType(food.getCuisineType().name())
+                .spicyLevel(food.getSpicyLevel().name())
+                .foodType(food.getFoodType().name())
+                .tempType(food.getTempType().name())
                 .ingredients(food.getIngredients().stream()
                         .map(IngredientResponse::from)
                         .toList())
