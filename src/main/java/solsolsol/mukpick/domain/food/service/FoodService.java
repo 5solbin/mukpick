@@ -6,6 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 import solsolsol.mukpick.domain.food.dto.FoodResponse;
 import solsolsol.mukpick.domain.food.entity.Food;
 import solsolsol.mukpick.domain.food.repository.FoodRepository;
+import solsolsol.mukpick.global.exception.BusinessException;
+import solsolsol.mukpick.global.exception.ErrorCode;
 
 @Service
 @RequiredArgsConstructor
@@ -17,7 +19,7 @@ public class FoodService {
     // 필터 없이 완전 랜덤
     public FoodResponse getRandomFood() {
         Food food = foodRepository.findRandom()
-                .orElseThrow(() -> new IllegalArgumentException("등록된 음식이 없습니다."));
+                .orElseThrow(() -> new BusinessException(ErrorCode.FOOD_NOT_FOUND));
         return FoodResponse.from(food);
     }
 
@@ -34,7 +36,7 @@ public class FoodService {
         String tempTypeStr    = tempType    != null ? tempType.name()    : null;
 
         Food food = foodRepository.findRandomWithFilter(cuisineTypeStr, spicyLevelStr, foodTypeStr, tempTypeStr)
-                .orElseThrow(() -> new IllegalArgumentException("해당 조건에 맞는 음식이 없습니다."));
+                .orElseThrow(() -> new BusinessException(ErrorCode.FOOD_NOT_FOUND_WITH_FILTER));
         return FoodResponse.from(food);
     }
 }
